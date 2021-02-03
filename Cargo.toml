@@ -1,0 +1,12 @@
+[package]
+name = "ble2json"
+version = "0.1.0"
+authors = ["teuvo486"]
+edition = "2018"
+
+[dependencies]
+tiny_http = "0.7"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bytes = "1.0"
+dbus = "0.9"
