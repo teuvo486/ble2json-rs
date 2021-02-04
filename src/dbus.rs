@@ -46,13 +46,9 @@ impl Conn {
 
     fn add_obj_paths(&mut self, conf: &Config) {
         for addr in conf.devices.values() {
-            if is_mac(addr) {
-                let mut path = OBJ_BASE.to_string();
-                path.push_str(&addr.replace(":", "_"));
-                self.obj_paths.insert(addr.to_string(), path);
-            } else {
-                eprintln!("Not a valid MAC address: {}", addr);
-            }
+            let mut path = OBJ_BASE.to_string();
+            path.push_str(&addr.replace(":", "_"));
+            self.obj_paths.insert(addr.to_string(), path);
         }
     }
 
@@ -70,12 +66,4 @@ impl Conn {
             .ok()
             .filter(|d: &MfgData| d.len() == 1)
     }
-}
-
-fn is_hex_byte(s: &&str) -> bool {
-    s.len() == 2 && s.matches(|c: char| c.is_ascii_hexdigit()).count() == 2
-}
-
-fn is_mac(addr: &str) -> bool {
-    addr.len() == 17 && addr.split(':').filter(is_hex_byte).count() == 6
 }

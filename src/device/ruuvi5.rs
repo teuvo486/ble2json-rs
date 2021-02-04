@@ -17,7 +17,7 @@ pub struct Ruuvi5 {
     tx_power: Option<i8>,
     movement_counter: Option<u8>,
     measurement_sequence: Option<u16>,
-    mac_address: Option<String>,
+    mac: Option<String>,
 }
 
 impl Ruuvi5 {
@@ -69,7 +69,7 @@ impl Ruuvi5 {
 
             measurement_sequence: Some(buf.get_u16()).filter(|n| n < &u16::MAX),
 
-            mac_address: Some(format!(
+            mac: Some(format!(
                 "{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}",
                 buf.get_u8(),
                 buf.get_u8(),
@@ -116,7 +116,7 @@ mod tests {
             tx_power: Some(4),
             movement_counter: Some(66),
             measurement_sequence: Some(205),
-            mac_address: Some("CB:B8:33:4C:88:4F".to_string()),
+            mac: Some("CB:B8:33:4C:88:4F".to_string()),
         }
     }
 
@@ -133,7 +133,7 @@ mod tests {
             tx_power: Some(20),
             movement_counter: Some(254),
             measurement_sequence: Some(65534),
-            mac_address: Some("CB:B8:33:4C:88:50".to_string()),
+            mac: Some("CB:B8:33:4C:88:50".to_string()),
         }
     }
 
@@ -150,7 +150,7 @@ mod tests {
             tx_power: Some(-40),
             movement_counter: Some(0),
             measurement_sequence: Some(0),
-            mac_address: Some("CB:B8:33:4C:88:51".to_string()),
+            mac: Some("CB:B8:33:4C:88:51".to_string()),
         }
     }
 
@@ -167,7 +167,7 @@ mod tests {
             tx_power: None,
             movement_counter: None,
             measurement_sequence: None,
-            mac_address: None,
+            mac: None,
         }
     }
 

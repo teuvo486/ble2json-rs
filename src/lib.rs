@@ -16,6 +16,7 @@ pub fn run() -> Result<()> {
     let home = std::env::var("HOME").expect("$HOME not set!");
     let path = Path::new(&home).join(CONF_PATH);
     let json = std::fs::read_to_string(path)?;
-    let conf: Config = serde_json::from_str(&json)?;
+    let mut conf: Config = serde_json::from_str(&json)?;
+    conf.check_macs();
     server::run(&conf)
 }
