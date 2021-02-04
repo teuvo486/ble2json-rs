@@ -5,12 +5,11 @@ use super::dbus::{Conn, MfgData};
 use super::Result;
 use ruuvi3::Ruuvi3;
 use ruuvi5::Ruuvi5;
-use serde::{Deserialize, Serialize};
-use std::cmp::PartialEq;
+use serde::Serialize;
 use std::io::Cursor;
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[derive(Clone, Debug, Serialize)]
+#[serde(untagged)]
 enum SensorData {
     Ruuvi3(Ruuvi3),
     Ruuvi5(Ruuvi5),
@@ -27,7 +26,7 @@ impl SensorData {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Data {
     name: String,

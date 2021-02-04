@@ -1,9 +1,7 @@
-use serde::{Deserialize, Serialize};
-use std::cmp::PartialEq;
+use serde::Deserialize;
 use std::collections::HashMap;
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Config {
     pub ip: String,
     pub port: u16,
@@ -21,18 +19,5 @@ impl Default for Config {
                 hm
             },
         }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::Config;
-
-    #[test]
-    fn test() {
-        let data = Config::default();
-        let json = serde_json::to_string_pretty(&data).unwrap();
-        let output: Config = serde_json::from_str(&json).unwrap();
-        assert_eq!(&data, &output);
     }
 }
