@@ -26,7 +26,6 @@ impl Conn {
             timeout: Duration::from_secs(TIMEOUT),
             obj_paths: HashMap::new(),
         };
-
         s.add_obj_paths(conf);
         s.start_discovery()?;
         Ok(s)
@@ -39,7 +38,6 @@ impl Conn {
             "org.bluez.Adapter1",
             "StartDiscovery",
         )?;
-
         self.conn.send_with_reply_and_block(message, self.timeout)?;
         Ok(())
     }
