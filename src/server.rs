@@ -46,11 +46,13 @@ pub fn run(conf: &Config) -> Result<()> {
             }
             (Method::Get, None, _) => {
                 let mut res = Response::from_data(&b"Not Found"[..]).with_status_code(404);
+                res.add_header(Header::from_str(CORS).unwrap());
                 res.add_header(Header::from_str(PLAIN).unwrap());
                 req.respond(res)?;
             }
             _ => {
                 let mut res = Response::from_data(&b"Method Not Allowed"[..]).with_status_code(405);
+                res.add_header(Header::from_str(CORS).unwrap());
                 res.add_header(Header::from_str(PLAIN).unwrap());
                 req.respond(res)?;
             }
